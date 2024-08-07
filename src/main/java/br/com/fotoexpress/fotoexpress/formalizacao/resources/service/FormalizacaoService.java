@@ -13,7 +13,7 @@ public class FormalizacaoService {
     @Autowired
     private FormalizacaoRepository formalizacaoRepository;
 
-    public FormalizacaoDTO save(UUID pedidoId, FormalizacaoDTO formalizacaoDTO) {
+    public FormalizacaoDTO save(FormalizacaoDTO formalizacaoDTO) {
         // verificar se o produtoId existe
         Formalizacao formalizacao = new Formalizacao();
         return toFormalizacaoDTO(formalizacao);
