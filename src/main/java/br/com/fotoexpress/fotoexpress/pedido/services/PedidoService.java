@@ -35,12 +35,10 @@ public class PedidoService {
     public List<PedidoResponse> buscaPedidosCadastrados() {
         List<Pedido> pedidos = pedidoRepository.findAll();
 
-        List<PedidoResponse> pedidosDTO = pedidos
+        return pedidos
                 .stream()
                 .map(PedidoResponseMapper.builder().build()::getPedidoDTO)
                 .collect(Collectors.toList());
-
-        return pedidosDTO;
     }
 
     public void salvaPedido(PedidoRequest pedidoDTO) {
@@ -70,6 +68,21 @@ public class PedidoService {
 
     }
 
+    public void mudaStatusPacote(Long idPacote, int status) {
+
+        try {
+           var pedido = pedidoRepository
+                    .findById(idPacote).orElseThrow();
+
+            pedido.setStatus(StatusPedido.getById(status));
+
+            pedidoRepository.save(pedido);
+        } catch (Exception e) {
+           throw new RuntimeException(e.getMessage());
+        }
+
+    }
+  
     public Pedido buscaPedidoPorId(Long id) {
         return pedidoRepository.findById(id).orElse(null);
     }
