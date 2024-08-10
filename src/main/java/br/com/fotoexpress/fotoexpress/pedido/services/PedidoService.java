@@ -81,6 +81,9 @@ public class PedidoService {
            throw new RuntimeException(e.getMessage());
         }
 
-
+    }
+  
+    public Pedido buscaPedidoPorId(Long id) {
+        return pedidoRepository.findById(id).orElse(null);
     }
 }
