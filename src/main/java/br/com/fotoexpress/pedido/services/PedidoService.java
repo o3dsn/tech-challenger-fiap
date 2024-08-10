@@ -1,5 +1,6 @@
 package br.com.fotoexpress.pedido.services;
 
+import br.com.fotoexpress.exceptions.PedidoException;
 import br.com.fotoexpress.pedido.model.Cliente;
 import br.com.fotoexpress.pedido.model.Pedido;
 import br.com.fotoexpress.pedido.model.dto.PacoteDTO;
@@ -9,6 +10,7 @@ import br.com.fotoexpress.pedido.model.enums.StatusPedido;
 import br.com.fotoexpress.pedido.model.mappers.PacoteMapper;
 import br.com.fotoexpress.pedido.model.mappers.PedidoResponseMapper;
 import br.com.fotoexpress.pedido.repository.PedidoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class PedidoService {
 
     private PacotesService pacotesService;
@@ -62,8 +65,9 @@ public class PedidoService {
                 .build();
         try {
             pedidoRepository.save(pedido);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (PedidoException e) {
+            log.info("Erro ao salvar pedido");
+            throw new PedidoException("Não foi possivel salvar o pedido, erro:" + e.getMessage());
         }
 
     }
@@ -77,8 +81,9 @@ public class PedidoService {
             pedido.setStatus(StatusPedido.getById(status));
 
             pedidoRepository.save(pedido);
-        } catch (Exception e) {
-           throw new RuntimeException(e.getMessage());
+       } catch (PedidoException e) {
+            log.info("Erro ao atualizar o pedido, erro:" + e.getMessage());
+            throw new PedidoException("Não foi possivel salvar o pedido, erro:" + e.getMessage());
         }
 
     }

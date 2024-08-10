@@ -1,4 +1,4 @@
-package br.com.fotoexpress.fotoexpress.pedido.resource;
+package br.com.fotoexpress.pedido.resource;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;

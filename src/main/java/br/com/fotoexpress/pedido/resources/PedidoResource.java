@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,8 @@ public class PedidoResource {
     }
 
     @GetMapping()
-    @Operation(summary = "Lista todos os pedidos cadastrados", description = "Busca uma listagem de pedidos ja cadastrados",
+    @Operation(summary = "Lista todos os pedidos cadastrados",
+            description = "Busca uma listagem de pedidos ja cadastrados",
             responses = @ApiResponse(responseCode = "200", description = "Ok", content = {@Content(schema = @Schema(implementation = Pedido.class))}))
     public ResponseEntity<List<PedidoResponse>> listaPedidosCadastrados() {
 
@@ -73,6 +75,11 @@ public class PedidoResource {
     }
 
     @PutMapping("/{idpacote}/{status}")
+    @Operation(summary = "Muda o status do pedido", description = "Muda o status do pedido quando um pedido for formalizado.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok"),
+            @ApiResponse(responseCode = "404", description = "Not Found")
+    })
     public ResponseEntity<String> mudaStatusPedido(@PathVariable("idpacote") Long idPacote,
                                                    @PathVariable("status") int status) {
 
@@ -80,7 +87,7 @@ public class PedidoResource {
         pedidoService.mudaStatusPacote(idPacote, status);
         log.info("Fim Mudar o status do pedido para: {}", status);
 
-        return ResponseEntity.ok().body("Estatus do pedido alterado com sucesso");
+        return ResponseEntity.ok().body("Estatus do pedido alterado com sucesso.");
     }
 
 }

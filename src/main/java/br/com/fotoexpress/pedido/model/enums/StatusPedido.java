@@ -1,5 +1,7 @@
 package br.com.fotoexpress.pedido.model.enums;
 
+import br.com.fotoexpress.exceptions.PedidoException;
+
 public enum StatusPedido {
 
     EM_ANDAMENTO (0,"Em andamento"),
@@ -30,7 +32,7 @@ public enum StatusPedido {
                 return status;
             }
         }
-        throw new IllegalArgumentException("Id inválido para Status: " + id);
+        throw new PedidoException("Id inválido para Status: " + id);
     }
 
     public static String getDescricaoById(int id) {
