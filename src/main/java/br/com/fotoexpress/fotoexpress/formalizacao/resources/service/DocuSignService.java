@@ -20,8 +20,8 @@ import java.util.Base64;
 
 @Service
 public class DocuSignService {
-    @Value("${docusign.clientId}")
-    private String clientId;
+    @Value("${docusign.integrationKey}")
+    private String integrationKey;
 
     @Value("${docusign.userId}")
     private String userId;
@@ -45,7 +45,7 @@ public class DocuSignService {
         Path privateKey = classPathResource.getFile().toPath();
 
         byte[] privateKeyBytes = Files.readAllBytes(privateKey);
-        OAuth.OAuthToken oAuthToken = apiClient.requestJWTUserToken(clientId, userId, Arrays.asList(OAuth.Scope_SIGNATURE), privateKeyBytes, 3600);
+        OAuth.OAuthToken oAuthToken = apiClient.requestJWTUserToken(integrationKey, userId, Arrays.asList(OAuth.Scope_SIGNATURE), privateKeyBytes, 3600);
         apiClient.setAccessToken(oAuthToken.getAccessToken(), oAuthToken.getExpiresIn());
     }
 
