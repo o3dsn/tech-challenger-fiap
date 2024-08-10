@@ -32,8 +32,8 @@ public class DocuSignService {
     @Value("${docusign.accountId}")
     private String accountId;
 
-//    @Value("classpath:${docusign.privateKey}")
-//    private Resource privateKey;
+    @Value("${docusign.assinaturaContratoURL}")
+    private String assinaturaContratoURL;
 
     private ApiClient apiClient;
 
@@ -83,6 +83,15 @@ public class DocuSignService {
         envelopeDefinition.setRecipients(recipients);
 
         envelopeDefinition.setStatus("sent");
+
+        EventNotification eventNotification = new EventNotification();
+        eventNotification.setUrl(assinaturaContratoURL);
+        eventNotification.setLoggingEnabled("true");
+        EnvelopeEvent completedEvent = new EnvelopeEvent();
+        completedEvent.setEnvelopeEventStatusCode("completed");
+        eventNotification.setEnvelopeEvents(Arrays.asList(completedEvent));
+
+        envelopeDefinition.setEventNotification(eventNotification);
 
         EnvelopesApi envelopesApi = new EnvelopesApi(apiClient);
         EnvelopeSummary envelopeSummary = envelopesApi.createEnvelope(accountId, envelopeDefinition);

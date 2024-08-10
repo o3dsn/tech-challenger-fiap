@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record FormalizacaoDTO(
-        UUID id,
-        UUID pedidoId,
+        Long id,
+        Long pedidoId,
+        String nomeCliente,
+        String emailCliente,
         LocalDateTime dataFormalizacao,
-        byte[] contrato,
+        String contratoEnviadoId,
         StatusFormalizacao statusFormalizacao
 ) {
 }

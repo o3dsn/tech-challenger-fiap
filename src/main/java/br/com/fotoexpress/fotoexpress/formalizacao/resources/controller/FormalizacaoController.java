@@ -1,5 +1,7 @@
 package br.com.fotoexpress.fotoexpress.formalizacao.resources.controller;
 
+import br.com.fotoexpress.fotoexpress.formalizacao.resources.domain.entity.Formalizacao;
+import br.com.fotoexpress.fotoexpress.formalizacao.resources.dto.DocuSignRequestDTO;
 import br.com.fotoexpress.fotoexpress.formalizacao.resources.dto.FormalizacaoDTO;
 import br.com.fotoexpress.fotoexpress.formalizacao.resources.dto.FormalizacaoRequestDTO;
 import br.com.fotoexpress.fotoexpress.formalizacao.resources.service.ContratoPDFService;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.ws.rs.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +29,7 @@ public class FormalizacaoController {
 
     @GetMapping
     public String get() {
-        return "OK podemos comecar as formalizacoes 2";
+        return "OK podemos comecar as formalizacoes";
     }
 
     @PostMapping
@@ -35,5 +38,11 @@ public class FormalizacaoController {
     public ResponseEntity<FormalizacaoDTO> save(@RequestBody FormalizacaoRequestDTO formalizacaoRequestDTO) throws IOException, ApiException {
         FormalizacaoDTO formalizacaoDTO = formalizacaoService.save(formalizacaoRequestDTO);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(formalizacaoDTO);
+    }
+
+    @PostMapping("contrato-assinado")
+    public ResponseEntity<FormalizacaoDTO> assinarContrato(@RequestBody DocuSignRequestDTO docuSignRequestDTO) {
+        FormalizacaoDTO formalizacaoDTO = formalizacaoService.assinarContrato(docuSignRequestDTO);
+        return  ResponseEntity.status(HttpStatusCode.valueOf(200)).body(formalizacaoDTO);
     }
 }
