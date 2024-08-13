@@ -1,5 +1,8 @@
 # tech-challenger-fiap
-Projeto de pos graduacao em arquitetura e desenvolvimento JAVA pela FIAP
+
+Bem-vindo ao repositório do projeto "Fotoexpress", desenvolvido como parte do desafio tecnológico da FIAP. Este projeto visa implementar uma API para uma empresa de fotografia, utilizando princípios de Domain-Driven Design (DDD), EventStorming e Clean Code.
+
+Projeto de pós-graduação em arquitetura e desenvolvimento JAVA pela FIAP
 ALUNOS 5ADJT
 
 <p>Edson</p>
@@ -7,6 +10,105 @@ ALUNOS 5ADJT
 <p>Luiz Romão</p>
 <p>Marcelo Souza</p>
 <p>Rodrigo Almeida</p>
+
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.10-brightgreen?style=flat&logo=spring&logoColor=white)
+![Java 17](https://img.shields.io/badge/Java-17-blue?style=flat&logo=java&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-3.8.5-orange?style=flat&logo=apachemaven&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=flat&logo=mysql&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-3.0-brightgreen?style=flat&logo=swagger&logoColor=white)
+
+## Sumário
+
+- [Visão Geral](#visão-geral)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Como Executar o Projeto](#como-executar-o-projeto)
+- [Endpoints da API](#endpoints-da-api)
+- [Contribuindo](#contribuindo)
+- [Licença](#licença)
+
+## Visão Geral
+
+O projeto consiste na criação de uma API para gerenciar processos e operações de uma empresa de fotografia. O desenvolvimento foi guiado pelos princípios de DDD para uma melhor organização do código e arquitetura, EventStorming para uma compreensão clara dos eventos e fluxos do sistema, e Clean Code para garantir um código limpo e sustentável.
+
+- [Event Storming](https://miro.com/app/board/uXjVK6a5xfM=/?share_link_id=868388996904)
+- [Wiki](https://www.notion.so/Tech-Challenge-P-S-TECH-f6d1fa9d631248b4a980ec4f1eadd898?pvs=4)
+- [Documentação](https://docs.google.com/document/d/1BBqJWWr-0kGuwFF-z3BwpcLIFU5yAA3k1wurFEO11VU/edit#heading=h.u65y1ld2csi)
+
+
+## Estrutura do Projeto
+
+- **/src/main/java**: Código fonte da aplicação.
+- **/src/main/resources**: Arquivos de configuração e recursos.
+
+## Como Executar o Projeto
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+1. **Clone o repositório:**
+
+    ```bash
+    git clone https://github.com/LuizRomao02/tech-challenger-fiap.git
+    ```
+
+2. **Navegue até o diretório do projeto:**
+
+    ```bash
+    cd tech-challenger-fiap
+    ```
+
+3. **Colocar as variaveis de ambiente que estão no arquivo que foi anexado junto com a documentação**
+   ```bash
+   caso isso nao seja feito o projeto nao ira fazer o build
+    ```
+5. **Construa o projeto com Maven:**
+
+    ```bash
+    mvn clean install
+    ```
+
+6. **Inicie a aplicação localmente:**
+
+    ```bash
+    mvn spring-boot:run
+    ```
+## Endpoints da API
+Abaixo segue ume sequencia do fluxo para cadastrar um pedido e formalizar o contrato. 
+
+1 - Listar os clientes cadastrados na base: http://localhost:8080/clientes \
+2 - Listar Pacotes disponívei: http://localhost:8080/pedidos/pacotes-disponiveis \
+3 - Cadastrar um pedido com usando o cliente e os pacotes escolhidos: \
+    URL: POST http://localhost:8080/pedidos \
+    Exemplo do corpo:
+   ``` json
+    {
+    	"idCliente": 7,
+    	"idPacotes": [1,6,7],
+    	"desconto":50
+    }
+  ```
+4 - Após o pedido cadastrado, enviar o contrato via *Docusign* para o cliente assinar. \
+    URL: \
+5 - Apos assinatura do contrato o status do pedido passará para "AGENDAR" \
+    URL: \
+
+    
+A API pode ser explorada e testada utilizando o Swagger. A documentação está disponível em:
+
+http://localhost:8080/api-docs
+
+## Contribuindo
+
+Contribuições são bem-vindas! Para contribuir com o projeto, por favor siga estes passos:
+
+1. Faça um fork do repositório.
+2. Crie uma branch para sua feature ou correção (`git checkout -b feature/nova-feature`).
+3. Faça commit das suas mudanças (`git commit -am 'Adiciona nova feature'`).
+4. Envie suas alterações para o repositório (`git push origin feature/nova-feature`).
+5. Abra um pull request.
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ## Configurando as Variáveis de Ambiente do DocuSign
 
